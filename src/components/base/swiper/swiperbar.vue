@@ -23,7 +23,7 @@ export default {
         return {
             title:"发现",
             find:'',
-              items: [
+            items: [
                '/static/img/banner1.jpg',
                '/static/img/banner2.jpg',
               '/static/img/banner3.jpg',
@@ -60,7 +60,6 @@ export default {
                 scrollX: true,
                 scrollY: false,
                 momentum: true,
-                
                 snap: {
                     loop: this.loop, // ture表示前后增加一张
                     threshold: 0.3,
@@ -79,6 +78,7 @@ export default {
                     pageIndex -= 1;
                 }
                 this.currentPageIndex = pageIndex;
+                console.log(pageIndex)
                 if (this.autoPlay) {
                     this._play();
                 }
@@ -146,7 +146,7 @@ export default {
 </script>
 <style scoped>
 .wrapper {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   min-height: 1px;
   overflow: hidden;

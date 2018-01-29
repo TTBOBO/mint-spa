@@ -1,6 +1,7 @@
 <template>
   <div>
       <div class="goods">
+            <header-bar :text="title" :left="left"></header-bar>
             <div class="menu-wrapper" ref="menuwrapper">
                 <ul>
                     <!--当currentIndex与index相等的时候，设置高亮-->
@@ -23,12 +24,17 @@
 </template>
 <script>
 import BScroll from 'better-scroll'
+import headerBar from '../../base/headerbar/headerbar'
 export default {
   data() {
     return {
         goods:[],  
         listHeight:[],  
         scrollY:0,
+         title: "商品列表",
+        left: {
+            status: true
+        }
     };
   },
   created() {
@@ -36,6 +42,9 @@ export default {
   },
   mounted() {
 
+  },
+  components: {
+      headerBar
   },
   methods:{
         _initData() {

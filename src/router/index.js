@@ -52,43 +52,67 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: index
+      component: resolve => { require(['@/components/index/index'], resolve) }, hiddent: true, title: '首页' 
     },
     {
       path: '/find',
       name: 'find',
-      component: find
+      component: resolve => { require(['@/components/find/find'], resolve) }, hiddent: true, title: '发现' 
     },
     {
       path: '/cart',
       name: 'cart',
-      component: cart
+      component: resolve => { require(['@/components/cart/cart'], resolve) }, hiddent: true, title: '购物车' 
     },
     {
       path: '/user',
       name: 'user',
-      component: user
+       component: resolve => { require(['@/components/user/user'], resolve) }, hiddent: true, title: '我的' 
     },
     {
       path: '/login',
       name: 'login',
-      component: login
+      component: resolve => { require(['@/components/user/login/login'], resolve) }, hiddent: true, title: '登录' 
     },
     {
-      path:'/goods',
-      name:'goods',
-      redirect: '/goods/goodsDetail',
-      component:goods,
-      children:[{
-        path:'/goodsDetail',
-        name:'goodsDetail',
-        component:goodsDetail,
-      },{
-        path:'/food',
-        name:'food',
-        component:food,
-        
-      }]
-    }
+      path:'/goodsDetail',
+      name:'goodsDetail',
+       component: resolve => { require(['@/components/index/goods/goodsDetail'], resolve) }, hiddent: true, title: '商品详情' 
+    },{
+      path:'/food',
+      name:'food',
+       component: resolve => { require(['@/components/index/goods1/goods'], resolve) }, hiddent: true, title: '商品' 
+      
+    },{
+      path:'/scroll',
+      name:'scroll',
+       component: resolve => { require(['@/components/index/scroll'], resolve) }, hiddent: true, title: 'scroll' 
+      
+    },{
+      path:'/scroll1',
+      name:'scroll1',
+       component: resolve => { require(['@/components/index/scroll1'], resolve) }, hiddent: true, title: 'scroll1' 
+      
+    },{
+      path:'/articleInfo',
+      name:'articleInfo',
+       component: resolve => { require(['@/view/articleInfo'], resolve) }, hiddent: true, title: 'articleInfo'
+    },{
+      path:'/allFeed',
+      name:'allFeed',
+       component: resolve => { require(['@/view/allFeed'], resolve) }, hiddent: true, title: 'allFeed'
+    },
+    {
+      path:'/news',
+      name:'news',
+       component: resolve => { require(['@/components/news/newView'], resolve) }, hiddent: true, title: 'news'
+    },
+    // {
+    //   path:'/goods',
+    //   name:'goods',
+    //   redirect: '/goods/goodsDetail',
+    //    component: resolve => { require(['@/components/index/goods/goods'], resolve) }, hiddent: true, 
+    //   children:[]
+    // },
   ]
 })

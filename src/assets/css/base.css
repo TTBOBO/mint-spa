@@ -1,9 +1,6 @@
-.content{
-    margin-top: 20px;
-}
 /**全局css设置*/
-*{font-family:"微软雅黑"; font-size: .12rem;}
-html, body {-ms-overflow-style: scrollbar;}
+*{font-family:"微软雅黑","黑体",HELVETICA;  }
+html, body {-ms-overflow-style: scrollbar; font-size: .12rem;}
 body{width:100%;margin:0;padding:0;overflow-x:hidden !important;background:#f2f2f2 !important;}
 .inline-block{display:inline-block}
 a{text-decoration:none;}
@@ -11,5 +8,5 @@ a:hover{text-decoration:none;cursor: pointer;}
 a:active{}
 
 em{font-style:normal}
-ul,ol,li{list-style:none;border:none;padding:0;margin:0;}
+ul,ol,li{list-style:none;border:none;padding:0;margin:0px;}
 img{border:0;vertical-align:middle}

@@ -4,47 +4,87 @@
 <template>
   <div id="app">
      <transition :name="transitionName">
-      <router-view class="child-view"></router-view>
+       <div >
+          <router-view  class="view-con" :style="{bottom:shwoBar ? 55+'px' : 0+'px'}"></router-view>
+       </div>
      </transition>
+     <!-- :style="{top:top+'px',bottom:bottom+'px'}" -->
       <!-- <transition  enter-active-class="animated bounceUp" leave-active-class="animated bounceInDown"> -->
         <tab-bar v-show="shwoBar"></tab-bar>
+        <pop></pop>
       <!-- </transition> -->
   </div>
   
 </template>
 
 <script>
-import tabBar from '@/components/base/tabbar/tabbar'
+import tabBar from "@/components/base/tabbar/tabbar";
+import pop from '@/components/pop/pop'
+
 export default {
   name: "app",
   data() {
     return {
       transitionName: "slide-left",
-      shwoBar:true,
-      fadein:''
+      shwoBar: false,
+      fadein: "",
+      top:40,
+      bottom:55
     };
   },
   methods: {},
+  createde() {},
   watch: {
     $route(to, from, next) {
       this.transitionName = this.$router.isBack ? "slide-right" : "slide-left";
       this.$router.isBack = false;
 
       //当路由不在首屏的几个页面是隐藏tabbar
-      if(to.path != '/' && to.path != '/find' && to.path != '/cart' && to.path != '/user') {
+      if (
+        to.path != "/" &&
+        to.path != "/find" &&
+        to.path != "/cart" &&
+        to.path != "/user"
+      ) {
         this.shwoBar = false;
-      }else {
-         this.shwoBar = true;
+        // this.top = 0;
+        // this.bottom = 0;
+      } else {
+        this.shwoBar = true;
+        //  this.top = 40;
+        // this.bottom = 55;
       }
     }
   },
   components: {
-    tabBar
-  },
+    tabBar,
+    pop
+  }
 };
 </script>
 
 <style>
+@import './assets/css/news.css';
+
+html {font-size: 625%; /*100 ÷ 16 × 100% = 625%*/}
+@media screen and (min-width:360px) and (max-width:374px) and (orientation:portrait) {
+    html { font-size: 703%; }
+}
+@media screen and (min-width:375px) and (max-width:383px) and (orientation:portrait) {
+    html { font-size: 732.4%; }
+}
+@media screen and (min-width:384px) and (max-width:399px) and (orientation:portrait) {
+    html { font-size: 750%; }
+}
+@media screen and (min-width:400px) and (max-width:413px) and (orientation:portrait) {
+    html { font-size: 781.25%; }
+}
+@media screen and (min-width:414px) and (max-width:431px) and (orientation:portrait){
+    html { font-size: 808.6%; }
+}
+@media screen and (min-width:432px) and (max-width:479px) and (orientation:portrait){
+    html { font-size: 843.75%; }
+}
 #app {
   font-family: 微软雅黑;
   -webkit-font-smoothing: antialiased;
@@ -52,13 +92,21 @@ export default {
   text-align: center;
   color: #2c3e50;
   padding: 0;
+   font-size: .16rem;
 }
 body {
   margin: 0;
   padding: 0;
 }
+.view-con{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+}
 .child-view {
   width: 100%;
+  overflow: hidden;
 }
 .child-view {
   position: absolute;

@@ -2,9 +2,9 @@
   <div>
        <mt-header fixed :title="text" :class="bgcolor">
             <div slot="left" v-show="left.status">
-                <mt-button @click="back"  icon="back">{{left.text}}</mt-button>
+                <mt-button @click="back"  :icon="left.icon">{{left.text}}</mt-button>
             </div>
-            <mt-button slot="right" v-show="right.status"  icon="back">{{right.text}}</mt-button>
+            <mt-button slot="right" v-show="right.status"  :icon="right.icon" @click="rightClick">{{right.text}}</mt-button>
         </mt-header>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
             default:function() {
                return  {
                     status:false,
-                    text:"返回"
+                    text:"返回",
+                    icon:"back"
                 }
             }
         },
@@ -44,6 +45,9 @@ export default {
         back () {
             this.$router.back();
             this.$emit('back');
+        },
+        rightClick() {
+            this.$emit('rightClick');
         }
     },
 }

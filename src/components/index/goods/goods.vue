@@ -1,9 +1,9 @@
 <template>
     <div>
-        <header-bar :text="title" :left="left"></header-bar>
+        <!-- <header-bar :text="title" :left="left"></header-bar> 
         <keep-alive>
             <router-view class="height"></router-view>
-        </keep-alive>
+        </keep-alive> -->
     </div>
 </template>
 <script>

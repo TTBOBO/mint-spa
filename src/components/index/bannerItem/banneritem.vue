@@ -28,32 +28,12 @@ export default {
                 title:'美食2',
                 icon:'',
                  color:"#e5c67a",
-                linkTo:'/goodsDetail'
+                linkTo:'/scroll'
             },{
                 title:'美食3',
                 icon:'',
                  color:"#e5c67a",
-                linkTo:'/goodsDetail'
-            },{
-                title:'美食4',
-                icon:'',
-                 color:"#26c6da",
-                linkTo:'/goodsDetail'
-            },{
-                title:'美食5',
-                icon:'',
-                 color:"#f07887",
-                linkTo:'/goodsDetail'
-            },{
-                title:'美食6',
-                icon:'',
-                 color:"#26c6da",
-                linkTo:'/goodsDetail'
-            },{
-                title:'美食7',
-                icon:'',
-                color:"#00ff00",
-                linkTo:'/goodsDetail'
+                linkTo:'/news'
             }]
         }
     },
@@ -71,8 +51,8 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 10px 0px;
-    padding-top: 150px
+    /* padding: 10px 0px; */
+    height: 100px;
 }
 .ItemView{
     width: 25%;

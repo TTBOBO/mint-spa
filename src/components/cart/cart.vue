@@ -1,12 +1,12 @@
 <template>
   <div>
-       <header-bar :text="title" >  </header-bar>
+       <header-bar :text="title" :right="right" @rightClick="rightClick">  </header-bar>
         <div class="content"></div>
         <!-- 购物车列表组件 -->
         <div id="cartContainer">
           
         </div>
-        <cartItem  :cartList="cartList" @changeGoods = "getData"></cartItem>
+        <cartItem  :cartList="globel.cart" :editStatus="editStatus" @changeGoods = "getData"></cartItem>
        
   </div>
 </template>
@@ -14,122 +14,47 @@
 import headerBar from "../base/headerbar/headerbar";
 import cartItem from "../base/cart/cartItem";
 // import BScroll from 'better-scroll'
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
       title: "购物车",
-      cartList:[{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品零食",
-        price:'16',
-        count:'2',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品12",
-        price:'66',
-        count:'5',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'24',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'24',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'24',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'24',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'24',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'24',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'24',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'24',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      },{
-        title:"可比克有所薯（口味随机）105g*3罐休闲膨化食品13",
-        price:'26',
-        count:'4',
-        picture:'/static/img/banner3.jpg',
-        select:false,
-        show:false
-      }]
+      right: {
+        status: true,
+        text: "编辑"
+      },
+      editStatus: false
     };
+  },
+  computed: {
+    ...mapState(["globel"])
   },
   components: {
     headerBar,
     cartItem
   },
-  methods:{
+  methods: {
     getData(data) {
-      console.log(data.goodsNum + ".." + data.priceSum);
+      // console.log(data.goodsNum + ".." + data.priceSum);
     },
-    _initData() {
-      let scroll = new BScroll(document.getElementById('cartContainer'), {
-        //options
-        startY: 0,
-        click:true
-      })
+    rightClick() {
+      if (!this.editStatus) {
+        this.right.text = "完成";
+        this.editStatus = true;
+      } else {
+        this.right.text = "编辑";
+        this.editStatus = false;
+      }
     }
-
   },
-  mounted() {
-    // this.$nextTick(() => {
-    //   this._initData();
-    // })
-  },
-  created() {
-
-  }
+  mounted() {},
+  created() {}
 };
 </script>
 <style scoped>
 .content {
   margin-top: 40px;
 }
-
 </style>
 
 

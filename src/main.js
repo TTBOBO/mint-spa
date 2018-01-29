@@ -24,16 +24,19 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 //引入store仓库
-import state from './store/index'
+import store from './store/index'
 //引入iconfont.css
 import '../static/css/iconfont.css'
 //引入vue2-animate.min.css
 import 'vue2-animate/dist/vue2-animate.min.css';
 /* eslint-disable no-new */
+import { MessageBox } from 'mint-ui';
+Vue.prototype.$MessageBox = MessageBox;
+
 new Vue({
   el: '#app',
   router,
-  state,
+  store,
   template: '<App/>',
   components: { App }
 })
