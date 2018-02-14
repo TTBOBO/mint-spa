@@ -4,9 +4,7 @@
 <template>
   <div id="app">
      <transition :name="transitionName">
-       <div >
-          <router-view  class="view-con" :style="{bottom:shwoBar ? 55+'px' : 0+'px'}"></router-view>
-       </div>
+          <router-view  class="view-con child-view" :style="{bottom:shwoBar ? 55+'px' : 0+'px'}"></router-view>
      </transition>
      <!-- :style="{top:top+'px',bottom:bottom+'px'}" -->
       <!-- <transition  enter-active-class="animated bounceUp" leave-active-class="animated bounceInDown"> -->
@@ -19,8 +17,9 @@
 
 <script>
 import tabBar from "@/components/base/tabbar/tabbar";
-import pop from '@/components/pop/pop'
-
+import pop from '@/components/pop/pop';
+import { mapState, mapGetters, mapMutations, mapActions} from 'vuex';
+import ykp from './assets/js/ykp';
 export default {
   name: "app",
   data() {
@@ -32,28 +31,37 @@ export default {
       bottom:55
     };
   },
+  computed: {
+    ...mapState([
+      'globel'
+    ])
+  },
   methods: {},
-  createde() {},
+  created() {
+  },
   watch: {
     $route(to, from, next) {
       this.transitionName = this.$router.isBack ? "slide-right" : "slide-left";
       this.$router.isBack = false;
 
-      //当路由不在首屏的几个页面是隐藏tabbar
-      if (
-        to.path != "/" &&
-        to.path != "/find" &&
-        to.path != "/cart" &&
-        to.path != "/user"
-      ) {
-        this.shwoBar = false;
-        // this.top = 0;
-        // this.bottom = 0;
-      } else {
-        this.shwoBar = true;
-        //  this.top = 40;
-        // this.bottom = 55;
-      }
+      /**防止每次刷新页面时  登录信息有误 */
+      let userInfo = ykp.getLocalStorage('userInfo');
+      
+      
+        //当路由不在首屏的几个页面是隐藏tabbar
+        if (
+          to.path != "/" &&
+          to.path != "/find" &&
+          to.path != "/cart" &&
+          to.path != "/user"
+        ) {
+          this.shwoBar = false;
+        } else {
+          this.shwoBar = true;
+        }
+      
+      this.globel.userInfo = userInfo ? JSON.parse(userInfo) : "";
+      
     }
   },
   components: {
@@ -106,7 +114,7 @@ body {
 }
 .child-view {
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .child-view {
   position: absolute;

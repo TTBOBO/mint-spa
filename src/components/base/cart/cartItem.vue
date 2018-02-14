@@ -2,36 +2,38 @@
     <div>
       <div ref="cartList"  class="cartCon" v-if="cartList.length > 0">
             <div ref="itemList">
-              <div  class="mint-loadmore-bottom" style="height:100px; line-height: 27px;"  v-show="startUp">
+              <div  class="mint-loadmore-bottom" style="height:100px; line-height: 40px;"  v-show="startUp">
                 <div style="width:28px;margin:auto;">
                      <mt-spinner type="fading-circle" style="margin:auto;" :size="12" ></mt-spinner>
                 </div>
                 <span v-show="bottomStatus">Loading...</span>
               </div>
-              <div class="goodsItem"  v-for="(item, index) of cartList"  :key="index" >
-                  <div class="checkbox">
-                      <label class="mint-checklist-label"  ><span class="mint-checkbox" ><input type="checkbox" v-model="item.select"  @change="changeGoods(index)"   class="mint-checkbox-input"> <span class="mint-checkbox-core" ></span></span> </label>
-                  </div>
-                  <div class="goodsPic">
-                      <img v-lazy="item.picture" />
-                  </div>
-                  <div class="goodInfo">
-                      <div class="goodname">
-                          <div><p>{{item.title}}</p></div>
-                          <div style="margin-right:5px;margin-left:4px;" @click="showChange(index,$event)"><span class="iconfont icon-more_light"></span></div>
-                      </div>
-                      <div class="goodcount"><p><span class="price">￥{{item.price}}</span><span class="num">x{{item.count}}</span></p></div>
-                      <!-- <transition   enter-active-class=" slideInRight" leave-active-class=" slideOutRight"> -->
-                      <div v-show="item.show" animate-duration="0.2s"  class="changeNum">
-                          <div style="width: 80%; padding-top: 10px; postion:relative;">
-                              <p class="iconfont icon-jianhao changeSpan" @click="reduce(index,$event)"></p><input class="goodsNum" v-model="item.count"  type="number"><p class="changeSpan iconfont icon-jiahao1" @click="add(index,$event)"></p>
-                          </div>
-                          <div class="successBtn" @click="showChange(index)">
-                              完成
-                          </div>
-                      </div>
-                      <!-- </transition> -->
-                  </div>
+              <div>
+                <div class="goodsItem"  v-for="(item, index) of cartList"  :key="index" >
+                    <div class="checkbox">
+                        <label class="mint-checklist-label"  ><span class="mint-checkbox" ><input type="checkbox" v-model="item.select"  @change="changeGoods(index)"   class="mint-checkbox-input"> <span class="mint-checkbox-core" ></span></span> </label>
+                    </div>
+                    <div class="goodsPic">
+                        <img v-lazy="item.picture" />
+                    </div>
+                    <div class="goodInfo">
+                        <div class="goodname">
+                            <div><p>{{item.title}}</p></div>
+                            <div style="margin-right:5px;margin-left:4px;" @click="showChange(index,$event)"><span class="iconfont icon-more_light"></span></div>
+                        </div>
+                        <div class="goodcount"><p><span class="price">￥{{item.price}}</span><span class="num">x{{item.count}}</span></p></div>
+                        <!-- <transition   enter-active-class=" slideInRight" leave-active-class=" slideOutRight"> -->
+                        <div v-show="item.show" animate-duration="0.2s"  class="changeNum">
+                            <div style="width: 80%; padding-top: 10px; postion:relative;">
+                                <p class="iconfont icon-jianhao changeSpan" @click="reduce(index,$event)"></p><input class="goodsNum" v-model="item.count"  type="number"><p class="changeSpan iconfont icon-jiahao1" @click="add(index,$event)"></p>
+                            </div>
+                            <div class="successBtn" @click="showChange(index)">
+                                完成
+                            </div>
+                        </div>
+                        <!-- </transition> -->
+                    </div>
+                </div>
               </div>
             </div>
       </div>

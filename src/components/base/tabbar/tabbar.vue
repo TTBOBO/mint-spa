@@ -15,28 +15,30 @@ export default {
         return {
             selected:"0",
             navbar:[{
-                    title: '首页',
+                    title: '关注',
                         name: '/',
-                        icon:'/static/img/home.png',
-                        active_icon:'/static/img/home_fill.png',
+                        icon:'./static/img/home.png',
+                        active_icon:'./static/img/home_fill.png',
                         active:true
                     },{
                     title: '发现',
                     name: 'find',
-                    icon: '/static/img/creative.png',
-                    active_icon: '/static/img/creative_fill.png',
+                    icon: './static/img/creative.png',
+                    active_icon: './static/img/creative_fill.png',
                     active:false
-                    },{
-                    title: '购物车',
-                    name: 'cart',
-                    icon: '/static/img/cart.png',
-                    active_icon: '/static/img/cart_fill.png',
-                    active:false
-                    },{
+                    }
+                    // ,{
+                    // title: '购物车',
+                    // name: 'cart',
+                    // icon: './static/img/cart.png',
+                    // active_icon: './static/img/cart_fill.png',
+                    // active:false
+                    // }
+                    ,{
                     title: '我的',
                     name: 'user',
-                    icon: '/static/img/people.png',
-                    active_icon: '/static/img/people_fill.png',
+                    icon: './static/img/people.png',
+                    active_icon: './static/img/people_fill.png',
                     active:false
                 }]
         }

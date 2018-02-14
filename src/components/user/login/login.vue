@@ -14,8 +14,8 @@
             <mt-tab-container class="page-tabbar-tab-container" style="height: 100%;position: absolute;left: 0;right: 0; top: 96px; bottom: 0;" v-model="active" swipeable>  
                 <mt-tab-container-item id="tab-container1">  
                     <div id="signIn">
-                        <mt-field class="label" label="用户名" placeholder="请输入用户名"></mt-field>
-                        <mt-field label="密码" placeholder="请输入密码" type="password"></mt-field>
+                        <mt-field class="label" v-model="login.username" label="用户名" placeholder="请输入用户名"></mt-field>
+                        <mt-field label="密码" v-model="login.password" placeholder="请输入密码" type="password"></mt-field>
                         <div style="margin:20px 10%;width:80%;"><mt-button @click="signIn" type="primary" size="large">登陆</mt-button></div>
                     </div>
                 </mt-tab-container-item>  
@@ -34,6 +34,10 @@
 
 <script>
 import headerBar from "../../base/headerbar/headerbar";
+import ykp from '../../../assets/js/ykp';
+import hm from '../../../assets/js/hm';
+import util from '../../../assets/js/util';
+import { mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 export default {
   data() {
     return {
@@ -42,7 +46,8 @@ export default {
       selected: "2",
       linePos: 0,
       left: {
-        status: true
+        status: true,
+        icon: "back"
       },
       login:{
           username:"",
@@ -55,12 +60,37 @@ export default {
       }
     };
   },
+  computed: {
+    ...mapState([
+      "globel"
+    ])
+  },
   components: {
     headerBar
   },
   methods: {
     signIn() {
-        console.log();
+        if(this.login.username == "" && this.login.password == "") {
+           this.$store.dispatch('getPop',{text:"请输入正常的账号和密码"});
+           return false;
+        }
+        this.$ajaxPost('/hmapi/api_login/admin_login',{
+           username:this.login.username,
+           password:this.login.password
+        }).then(res => {
+          if(res.msg){
+            this.$store.dispatch('getPop',{text:res.msg});
+          }else{
+            if(res){
+              this.$store.dispatch('getPop',{text:"登录成功"});
+              this.globel.userInfo = res.data;
+              ykp.setLocalStorage('userInfo',JSON.stringify(res.data));
+              this.$router.replace('/');
+            }else{
+              this.$store.dispatch('getPop',{text:"请输入正确的账号密码"});
+            }
+          }
+        })
     },
     register() {
 

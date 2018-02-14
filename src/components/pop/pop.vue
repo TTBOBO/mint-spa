@@ -6,6 +6,7 @@
          v-model="globel.pop.showPop"
          :modal="true"
          class="mint-popup-2"
+         style="background-color: rgba(0,0,0,.7) !important;"
     >
          <p class="pop-content">{{globel.pop.text}}</p>
         </mt-popup>
@@ -53,7 +54,6 @@ export default {
   },
   watch: {
       showPop(val) {
-          console.log(val);
         if (val) {
           setTimeout(() => {
             this.showPop = false;
@@ -68,7 +68,7 @@ export default {
         width: 100%;
          height: 40px;
         text-align: center;
-        background-color: rgba(0,0,0,.7);
+        
         backface-visibility: hidden;
       }
 .mint-popup-2 p {

@@ -24,9 +24,9 @@ export default {
             title:"发现",
             find:'',
             items: [
-               '/static/img/banner1.jpg',
-               '/static/img/banner2.jpg',
-              '/static/img/banner3.jpg',
+               './static/img/banner1.jpg',
+               './static/img/banner2.jpg',
+              './static/img/banner3.jpg',
             ],
             height:0,
             loop:true, // 是否为循环播放

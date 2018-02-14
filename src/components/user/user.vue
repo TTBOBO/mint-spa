@@ -5,51 +5,73 @@
         </div>
         <template>
             <div class="header-top">
-                 <img class="headpic" src="/static/img/banner3.jpg" />
-                 <span v-if="loginStatus"><router-link to="find">用户名</router-link></span>
+                 <img class="headpic" v-if="globel.userInfo" :src="globel.userInfo.face" />
+                <img class="headpic" v-if="!globel.userInfo" src="static/img/banner2.jpg" />
+                 <span v-if="globel.userInfo"><router-link to="find">{{globel.userInfo.uname}}</router-link></span>
                  <span v-else><router-link to="login">注册/登录</router-link></span>
-                 <img class="bgImg"/>
+                 <img class="bgImg" src="static/img/headerbg.jpg"/>
             </div>
         </template>
-        <div class="toolbox">
+        <!-- <div class="toolbox">
             <div class="iconCon"><span class=" iconfont icon-dingdan"></span><p>未发货</p></div>
             <div class="iconCon"><span class=" iconfont icon-dingdan"></span><p>已发货</p></div>
             <div class="iconCon"><span class=" iconfont icon-dingdan"></span><p>已收货</p></div>
             <div class="iconCon"><span class=" iconfont icon-dingdan"></span><p>评论</p></div>
-        </div>
+        </div> -->
         <swipe :data="swipeList"></swipe>
+        <swipe :data="swipeList1"></swipe>
   </div>
 </template>
 <script>
-import headerBar from '../base/headerbar/headerbar'
-import cell from '../base/cell/cell'
-import swipe from '../base/cell/swipe'
+import headerBar from '../base/headerbar/headerbar';
+import cell from '../base/cell/cell';
+import swipe from '../base/cell/swipe';
+import { mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 export default {
     data() {
         return {
             title:"我的",
             swipeList:{
                 data:[{
-                    title:'我的订单',
-                    link:'/',
+                    title:'发布的文章',
+                    link:'/release',
                     icon:'iconfont icon-dingdan'
                 },{
-                    title:'我的收藏',
-                    link:'/find',
-                    icon:'iconfont icon-biaoxing',
+                    title:'收藏的文章',
+                    link:'/collection',
+                    icon:'iconfont icon-biaoxingfill',
                 },{
-                    title:'我的评论',
-                    link:'/find',
-                    icon:'iconfont icon-comment'
+                    title:'喜欢的文章',
+                    link:'/favative',
+                    icon:'iconfont icon-xihuanfill'
                 },{
+                    title:'浏览记录',
+                    link:'/browse',
+                    icon:'iconfont icon-salefill'
+                }],
+            
+            },
+            swipeList1:{
+                data:[
+                //     {
+                //     title:'关于我们',
+                //     link:'/browse',
+                //     icon:'iconfont icon-tishifill'
+                // },
+                {
                     title:'我的设置',
-                    link:'/find',
+                    link:'/setting',
                     icon:'iconfont icon-shezhi',
                 }],
             
             },
             loginStatus:false
         }
+    },
+    computed: {
+        ...mapState([
+            "globel"
+        ])
     },
     components: {
         headerBar,
@@ -100,7 +122,6 @@ export default {
     height:100%;
     /* filter: blur(2px); */
     z-index: -2;
-    background: url('/static/img/headerbg.jpg');
 }
 .headpic{
     width: 50px;
@@ -134,6 +155,7 @@ export default {
     margin: 0px auto;
     font-size: 12px;
 }
+
 </style>
 
 

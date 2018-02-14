@@ -44,6 +44,8 @@ export default {
        text-align: left;
        vertical-align: middle;
 }
+
+
 </style>
 
 

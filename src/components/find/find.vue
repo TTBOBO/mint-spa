@@ -1,89 +1,35 @@
 <template>
   <div >
-       <header-bar  :text="title" >
-        </header-bar>
-         <!-- v-infinite-scroll="loadMore"    @bottom-status-change="handleBottomChange"-->  
-        <div class="container" >
-            <mt-loadmore 
-                id="loadmore"
-                style="font-size:12px;"
-                ref="loadmore"
-                :top-method="loadTop" 
-                :bottom-method="loadBottom"
-                :top-status.sync="topStatus"
-                topPullText="下拉刷新"
-                :bottomDistance="bottomDistance"
-                :topDistance="topDistance"
-               
-				@bottom-status-change="handleBottomChange"
-            >
-            <div class="newsCon">
-                <div v-for="(item ,index) in newsList" :key="index">
-                    <div class="newsItem" v-if="item.pic.length == 1" @click="articleInfo(item.id)">
-                        <div class="content-left">
-                            <div class="content-left-top">
-                                {{item.title}}
-                            </div>
-                            <div class="content-left-bottom">
-                            <div>
-                                    <span class="tip">
-                                        {{item.tip}}
-                                    </span>
-                                    <span class="feedback">
-                                        {{item.feed}}评
-                                    </span>
-                            </div>
-                                <span class="zan feedback iconfont icon-zantong">
-                                    {{item.zan}}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="content-right">
-                            <img :src="item.pic[0]" class="right-img" style="width:100%; height:100%;" alt="">
-                        </div>
-                    </div>
-                    <div class="newsItem-one" v-if="item.pic.length == 3" @click="articleInfo(item.id)">
-                        <div class="newsItem-one-top">
-                            {{item.title}}
-                        </div>
-                        <div class="newsItem-one-center">
-                            <img v-for="(img ,i) in item.pic" :src="img" v-if="i < 3" class="right-img" style="width:32%; height:100%;  border-radius: 2px;" alt="">
-                        </div>
-                        <div class="newsItem-one-bottom">
-                            <div class="content-left-bottom" style="margin-top: .02rem; width:100%;">
-                            <div>
-                                    <span class="tip">
-                                        {{item.tip}}
-                                    </span>
-                                    <span class="feedback">
-                                        {{item.feed}}评
-                                    </span>
-                            </div>
-                                <span class="zan feedback iconfont icon-zantong">
-                                    {{item.zan}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- <div slot="bottom" class="mint-loadmore-bottom" style="height:100px; line-height: 27px;"  v-show="startUp">
-                <div style="width:28px;margin:auto;">
-                     <mt-spinner type="fading-circle" style="margin:auto;" :size="12" ></mt-spinner>
-                </div>
-                <span v-show="bottomStatus  === 'loading'">Loading...</span>
-
-            </div> -->
-            </mt-loadmore>
+       <header-bar  :text="title" :right="right" @rightClick="add" ></header-bar>
+        <div style="position: relative;" id="swiper">
+            <!-- 轮播图 -->
+            <swiper-bar></swiper-bar>
         </div>
+        <div id="con" style=" position:relative;overflow:hidden;">
+            <!-- 当前容器的高度  默认可不穿 -->
+          <loadDemo
+                    @loadMore="changePage"
+                    :pageObj="pageObj"
+                    :isNoMore="isNoMore"
+                    :header="header"
+                    :curHeight="curHeight"   
+                    ref ="loadMore"
+                   >
+                   <userArticle @reloadPage="initPage" :newsList="newsList"></userArticle>
+                   <!-- <articleCom @reloadPage="initPage" :newsList="newsList"></articleCom>  -->
+        </loadDemo>
+      </div>
   </div>
 </template>
 <script>
-import headerBar from '../base/headerbar/headerbar'
-import cell from '../base/cell/cell'
-import swipe from '../base/cell/swipe'
+import headerBar from '../base/headerbar/headerbar';
 import BScroll from "better-scroll";
 import { Indicator } from 'mint-ui';
+import swiperBar from "../base/swiper/swiperbar";
+import loadDemo from "../base/loadmore/loadDemo";
+import articleCom from "./articleCom";
+import ykp from "../../assets/js/ykp";
+import userArticle from "./userArticle";
 export default {
     data() {
         return {
@@ -91,92 +37,63 @@ export default {
             swipeList:{
                 data:[],
             },
-            topStatus:false,
-            bottomStatus :false,
-            bottomDistance:60,
-            topDistance:60,
-            wrapperHeight:0,
-            startUp:false,
-            newsList:[{
-                title:'苹果鞥更新心痛允许用户选择大烧烤了你打了款你发 那看  你看了卡啊发顺丰',
-                pic:['/static/img/banner3.jpg','/static/img/banner2.jpg','/static/img/banner1.jpg'],
-                zan:"444",
-                feed:'22',
-                tip:"新闻",
-                id:"1"
-            },{
-                title:'苹果鞥更新心痛允许用户选择大烧烤了你打了款你发 那看  你看了卡啊发顺丰1',
-                pic:['/static/img/banner3.jpg'],
-                zan:"444",
-                feed:'22',
-                tip:"资讯",
-                id:"2"
-            }]
+           right: {
+                status: true,
+                icon: "iconfont icon-jiahao1"
+            },
+            pageObj: {
+                page: 1,
+                limit: 3,
+                filter: "",
+                order: ""
+            },
+            isNoMore:false,
+            newsList:[],
+            header:false,
+            curHeight:0
         }
     },
     components: {
         headerBar,
-        swipe
+        swiperBar,
+        loadDemo,
+        articleCom,
+        userArticle
     },
     methods:{
-        articleInfo(id) {
-            this.$router.next({
-                path:"/articleInfo",
-                query: {id:id} 
+        //添加新的文章
+        add(){
+            this.$router.push('/addArticle');
+        },
+        changePage(objList){
+           this.initPage(objList);
+      },
+      /**@augments page 页数   不传  默认1  传就是当前页 */
+        initPage(page){
+            this.pageObj.filter = "hm_archives.typeid=1";
+            this.pageObj.order = "hm_archives.pubdate desc";
+            this.pageObj.auth = 1;
+            this.$ajaxPost("/hmapi/article/api_article/grid", this.pageObj).then(res =>{
+                if(res.data.rows.length == 0) {
+                    this.$store.dispatch("getPop", { text: "没有更多了" });
+                     this.isNoMore = true;
+                }else{
+                     this.pageObj.page == 1 ? this.newsList = res.data.rows  :  this.newsList.push(...res.data.rows);
+                }
+                this.$refs.loadMore.forceUpdate(true);
+                // setTimeout(() =>{
+                //     this.$refs.loadMore.forceUpdate(true);
+                // },300)
             })
-        },
-        handleBottomChange(status) {
-            this.bottomStatus = status;
-            this.startUp = true;
-        },
-        loadTop() {
-            Indicator.open({
-                // text: 'Loading...',
-                spinnerType: 'fading-circle'
-            });
-            setTimeout(() => {
-                this.newsList = [];
-                for(var i = 0; i < 3; i++) {
-                    this.newsList.push({
-                        title:'苹果鞥更新心痛允许用户选择大烧烤了你打了款你发 那看  你看了卡啊发顺丰'+i,
-                        pic:['/static/img/banner3.jpg'],
-                        zan:"444",
-                        feed:parseInt(Math.random()*100),
-                        tip:"资讯",
-                         id:i
-                    })
-                }
-                Indicator.close();
-                this.$refs.loadmore.onTopLoaded();
-            },2000)
-        },
-        loadMore() {
-            this.loadData();
-        },
-        loadBottom() {
-             Indicator.open({
-                // text: 'Loading...',
-                spinnerType: 'fading-circle'
-            });
-            setTimeout(() => {
-                this.startUp = false;
-                for(var i = 0; i < 3; i++) {
-                    this.newsList.push({
-                        title:'苹果鞥更新心痛允许用户选择大烧烤了你打了款你发 那看  你看了卡啊发顺丰'+i,
-                        pic:['/static/img/banner3.jpg','/static/img/banner2.jpg','/static/img/banner1.jpg'],
-                        zan:"444",
-                        feed:parseInt(Math.random()*100),
-                        tip:"资讯",
-                        id:parseInt(Math.random()*10)
-                    })
-                }
-                 Indicator.close();
-                this.$refs.loadmore.onBottomLoaded();
-            },2000)
-        },
+        }
     },
     mounted() {
-        // this.$store.dispatch('getPop',{text:"111"});
+        this.initPage();
+        
+        setTimeout(() =>{
+            //创建节点后  获取高度并且减去 加上  tabber高度
+            this.curHeight = document.getElementById("swiper").clientHeight+55;
+        },20);
     },
     created() {
     }
@@ -235,7 +152,7 @@ img {
   border-radius: 4px;
 }
 .container {
-    position: absolute;
+    /* position: absolute; */
     left: 0px;
     top: 40px;
     bottom: 55px;

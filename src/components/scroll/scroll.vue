@@ -46,7 +46,7 @@ export default {
 		});
 		this.$nextTick(() => {
 			var scroll = new BScroll(this.$refs.wrapper,{
-				scrollX:false,
+				scrollX:true,
 				scrollY:true,
 				click:true,
 				eventPassthrough:"horizontal",

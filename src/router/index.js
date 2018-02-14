@@ -50,9 +50,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      ///components/index/index
       path: '/',
       name: 'index',
-      component: resolve => { require(['@/components/index/index'], resolve) }, hiddent: true, title: '首页' 
+      component: resolve => { require(['@/components/news/newView'], resolve) }, hiddent: true, title: '首页' 
     },
     {
       path: '/find',
@@ -107,6 +108,42 @@ export default new Router({
       name:'news',
        component: resolve => { require(['@/components/news/newView'], resolve) }, hiddent: true, title: 'news'
     },
+    {
+      path:'/scroll2',
+      name:'scroll2',
+       component: resolve => { require(['@/components/base/loadmore/loadDemo'], resolve) }, hiddent: true, title: 'scroll2'
+    },
+    {
+      path:'/collection',
+      name:'collection',
+       component: resolve => { require(['@/components/user/collection'], resolve) }, hiddent: true, title: 'collection',meta:{loginStatus:true}
+    },
+    {
+      path:'/favative',
+      name:'favative',
+       component: resolve => { require(['@/components/user/favative'], resolve) }, hiddent: true, title: 'favative',meta:{loginStatus:true}
+    }, {
+      path:'/browse',
+      name:'browse',
+       component: resolve => { require(['@/components/user/browse'], resolve) }, hiddent: true, title: 'browse',meta:{loginStatus:true}
+    }, {
+      path:'/newsType',
+      name:'newsType',
+       component: resolve => { require(['@/view/newsType'], resolve) }, hiddent: true, title: 'newsType'
+    }, {
+      path:'/addArticle',
+      name:'addArticle',
+       component: resolve => { require(['@/view/addArticle'], resolve) }, hiddent: true, title: 'addArticle',meta:{loginStatus:true}
+    }, {
+      path:'/release',
+      name:'release',
+       component: resolve => { require(['@/components/user/release'], resolve) }, hiddent: true, title: 'release',meta:{loginStatus:true}
+    }, {
+      path:'/setting',
+      name:'setting',
+      component: resolve => { require(['@/components/user/setting'], resolve) }, hiddent: true, title: 'setting',meta:{loginStatus:true}
+    }
+
     // {
     //   path:'/goods',
     //   name:'goods',

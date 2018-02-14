@@ -33,6 +33,24 @@ import 'vue2-animate/dist/vue2-animate.min.css';
 import { MessageBox } from 'mint-ui';
 Vue.prototype.$MessageBox = MessageBox;
 
+import {ajaxGet,ajaxPost} from './api/AjaxApi';
+
+import ykp from './assets/js/ykp';
+
+Vue.prototype.$ajaxGet = ajaxGet;
+Vue.prototype.$ajaxPost = ajaxPost;
+router.beforeEach((to, from, next) => {  
+  let userInfo = ykp.getLocalStorage('userInfo');
+    if(to.meta.loginStatus && !userInfo ){
+      router.push("/login");
+    } else if (to.meta.loginStatus && to.path !== '/login' && userInfo) {
+      next();
+    }  else if (to.meta.loginStatus && to.path === '/login' && userInfo) { // 已经登录且前往的是登录页跳转到首页
+      router.push("/");
+    }else if(!to.meta.loginStatus){
+      next();
+    }
+}) 
 new Vue({
   el: '#app',
   router,

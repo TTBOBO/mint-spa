@@ -45,7 +45,7 @@
     padding: 2px 0px;
     display: flex;
     flex-direction: row;
-    margin-bottom: 0px;
+    /* margin-bottom: .1rem; */
     justify-content: space-between;
 }
 .tip{
@@ -67,9 +67,10 @@
     line-height: 21px;
 }
 .zan {
-    display: flex;
+    display: inline-block;
     flex-direction: row;
     justify-content: space-between;
+    font-size: .1rem;
 }
 .content-right {
     width: 1.2rem;
@@ -88,7 +89,7 @@
 
 }
 .newsItem-one {
-    height: 1.35rem;
+    height: 1.45rem;
     display: flex;
     flex-direction: column;
     background: rgb(255, 255, 255);
@@ -122,4 +123,59 @@
 }
 .mint-spinner-snake,.mint-spinner-fading-circle {
     margin:auto!important;
+}
+
+
+/* 更多 */
+
+.moreList{
+    margin: 0;
+    padding: 0;
+    height: .7rem;
+    display: flex;
+    flex-flow: row;
+    list-style: none;
+    position: relative;
+    overflow: hidden;
+    padding: .1rem 0;
+}
+.moreList::after{
+    position: absolute;
+    content: "";
+    width: 100%;
+    bottom: 0;
+    height: .01rem;
+    background: rgba(0, 0, 0, .1);
+    transform: scaleY(.5);
+}
+.moreList li{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 .1rem;
+    min-width: .5rem;
+}
+.moreList li .imgbox{
+    width: .35rem;
+    height: .35rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: .01rem solid #e7e7e7;
+    line-height: .35rem;
+    font-size: .2rem;
+}
+.moreList li p{
+    margin: 0;
+    font-size: .12rem;
+}
+.yellow{
+    color: yellow;
+}
+
+.scroll-content{
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    background: #fff;
 }

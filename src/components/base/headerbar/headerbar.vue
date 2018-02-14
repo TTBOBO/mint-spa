@@ -4,7 +4,7 @@
             <div slot="left" v-show="left.status">
                 <mt-button @click="back"  :icon="left.icon">{{left.text}}</mt-button>
             </div>
-            <mt-button slot="right" v-show="right.status"  :icon="right.icon" @click="rightClick">{{right.text}}</mt-button>
+            <mt-button slot="right" v-show="right.status"  @click="rightClick"><span :class="right.icon"></span>{{right.text}}</mt-button>
         </mt-header>
   </div>
 </template>
