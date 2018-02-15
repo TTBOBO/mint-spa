@@ -147,17 +147,18 @@ export default {
         return;
       }
       setTimeout(() => {
+        console.log( this.$refs.Wrapper.parentNode.parentNode.clientHeight - this.curHeight);
         if (this.$refs.Wrapper && (this.pullDownRefresh || this.pullUpLoad)) {
           //+1  超出屏幕最大高度才会有效果      this.header  当有顶部时
           if(this.header){
-            this.$refs.Wrapper.style.height =  (this.$refs.Wrapper.parentNode.parentNode.clientHeight-40)/100+"rem" ;
-            this.$refs.scrollList.style.minHeight = (this.$refs.Wrapper.parentNode.parentNode.clientHeight-39)/100+"rem" ;
+            this.$refs.Wrapper.style.height =  (this.$refs.Wrapper.parentNode.parentNode.clientHeight-40)+"px" ;
+            this.$refs.scrollList.style.minHeight = (this.$refs.Wrapper.parentNode.parentNode.clientHeight-39)+"px" ;
           }else if(this.curHeight){   //当容器自定义高度时  需传一个高度进来
-            this.$refs.Wrapper.style.height =  (this.$refs.Wrapper.parentNode.parentNode.clientHeight-this.curHeight)/100+"rem" ;
-            this.$refs.scrollList.style.minHeight = (this.$refs.Wrapper.parentNode.parentNode.clientHeight-this.curHeight+1)/100+"rem";
+            this.$refs.Wrapper.style.height =  (this.$refs.Wrapper.parentNode.parentNode.clientHeight-this.curHeight)+"px" ;
+            this.$refs.scrollList.style.minHeight = (this.$refs.Wrapper.parentNode.parentNode.clientHeight-this.curHeight+1)+"px";
           }else{
-            this.$refs.Wrapper.style.height =  (this.$refs.Wrapper.parentNode.parentNode.clientHeight)/100+"rem" ;
-            this.$refs.scrollList.style.minHeight = (this.$refs.Wrapper.parentNode.parentNode.clientHeight+1)/100+"rem";
+            this.$refs.Wrapper.style.height =  (this.$refs.Wrapper.parentNode.parentNode.clientHeight)+"px" ;
+            this.$refs.scrollList.style.minHeight = (this.$refs.Wrapper.parentNode.parentNode.clientHeight+1)+"px";
           }
          
         

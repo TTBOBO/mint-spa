@@ -93,6 +93,8 @@ export default {
         setTimeout(() =>{
             //创建节点后  获取高度并且减去 加上  tabber高度
             this.curHeight = document.getElementById("swiper").clientHeight+55;
+            console.log(this.curHeight);
+            console.log(document.getElementById("swiper").clientHeight);
         },20);
     },
     created() {

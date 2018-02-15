@@ -164,7 +164,7 @@ export default {
   mounted () {
      this.$nextTick(() => {
         if(this.custom){
-            this.width = (document.querySelector('body').clientWidth-30)/100+"rem";
+            this.width = (document.querySelector('body').clientWidth-30)+"px";
         }
      })  
   },
