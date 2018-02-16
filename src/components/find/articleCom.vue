@@ -116,8 +116,8 @@ import { Lazyload } from 'mint-ui';
 import Vue from 'vue';
 Vue.use(Lazyload,{
     preLoad: 1.3,  
-    error:'./static/img/banner3.jpg',
-    loading:'./static/img/banner3.jpg',
+    error:'./static/img/picture.png',
+    loading:'./static/img/picture.png',
 });
 
 import swipe from '../base/cell/swipe';

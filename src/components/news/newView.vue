@@ -181,7 +181,10 @@ export default {
       this.initPage(objList);
     },
     initPage(page) {
+      console.log()
       this.globel.newsList[this.currentPage].objList = page ? page : 1;
+      //当下这行可忽略
+      this.globel.newsList[this.currentPage].objList.filter = "hm_archives.typeid = "+ ( (this.currentPage % 7 ) + 2);
       this.$ajaxPost("/hmapi/article/api_article/grid", this.globel.newsList[this.currentPage].objList).then(
         res => {
           if(res.data.rows.length > 0 ){

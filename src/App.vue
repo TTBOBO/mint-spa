@@ -6,11 +6,8 @@
      <transition :name="transitionName">
           <router-view  class="view-con child-view" :style="{bottom:shwoBar ? 55+'px' : 0+'px'}"></router-view>
      </transition>
-     <!-- :style="{top:top+'px',bottom:bottom+'px'}" -->
-      <!-- <transition  enter-active-class="animated bounceUp" leave-active-class="animated bounceInDown"> -->
         <tab-bar v-show="shwoBar"></tab-bar>
         <pop></pop>
-      <!-- </transition> -->
   </div>
   
 </template>

@@ -8,7 +8,7 @@ import store from '../store/index'
 
 axios.defaults.timeout = 5000;
 // http://123.207.114.48:86/hmapi/api_login/login
-axios.defaults.baseURL = env.NODE_ENV == "\"development\"" ? ' http://123.207.114.48:86/' : ' http://123.207.114.48:86/';
+axios.defaults.baseURL = env.NODE_ENV == "\"development\"" ? '  http://123.207.114.48:86/' : ' http://www.huimin.com/';
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 /**

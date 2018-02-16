@@ -353,6 +353,12 @@ export default {
         filter: "hm_archives.id=" + this.id
       }).then(res => {
         this.articleInfo = res.data;
+        this.$nextTick(() => {
+          let img = document.querySelectorAll('.article-content img');
+          img.forEach(element => {
+            element.style.width = "100%";
+          });
+        })
       });
     },
     /** 初始化 文章热门评论 */

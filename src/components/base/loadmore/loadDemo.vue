@@ -147,7 +147,7 @@ export default {
         return;
       }
       setTimeout(() => {
-        console.log( this.$refs.Wrapper.parentNode.parentNode.clientHeight - this.curHeight);
+        // console.log( this.$refs.Wrapper.parentNode.parentNode.clientHeight - this.curHeight);
         if (this.$refs.Wrapper && (this.pullDownRefresh || this.pullUpLoad)) {
           //+1  超出屏幕最大高度才会有效果      this.header  当有顶部时
           if(this.header){

@@ -38,8 +38,8 @@ export default {
         if(this.article.title && this.article.content){
           let data = {
             name:this.article.title,
-            descrsiption:this.article.content,
-            mid:JSON.parse(ykp.getLocalStorage("userInfo")).mid
+            description:this.article.content,
+            member:JSON.parse(ykp.getLocalStorage("userInfo")).mid
           };
           
           this.$ajaxPost("/hmapi/article/api_article/user_add_article", data).then( res => {
