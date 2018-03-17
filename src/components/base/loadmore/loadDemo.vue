@@ -56,6 +56,7 @@ import BScroll from "better-scroll";
 import util from "../../../assets/js/util";
 import ykp from "../../../assets/js/ykp";
 import loading from "./loading";
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -142,6 +143,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      "SETPOS"
+    ]),
     initScroll() {
       if (!this.$refs.Wrapper) {
         return;
@@ -193,12 +197,6 @@ export default {
         this.beforePullDown = false;
         this.isPullingDown = true;
         this.initPage();
-        // setTimeout(() => {
-        //   for (var i = 0; i < 20; i++) {
-        //     this.data.push(i);
-        //   }
-        //   this.forceUpdate(true);
-        // }, 600);
       });
 
       this.scroll.on("scroll", pos => {
@@ -218,6 +216,17 @@ export default {
         this.pullDownStyle = `top:${10 -
           (this.pullDownRefresh.stop - pos.y)}px`;
       });
+
+      //返回值 设置 scrollTop  默认值
+      if(this.globel.newsList[this.globel.currentPage].scrollTop){
+        this.scroll.scrollTo(0,this.globel.newsList[this.globel.currentPage].scrollTop,0);
+      }
+      
+
+      //设置每个scroll的  scrollTop
+      this.scroll.on('scrollEnd',pos => {
+        this.globel.newsList[this.globel.currentPage].scrollTop = pos.y;
+      })
     },
     _initPullUpLoad() {
       this.scroll.on("pullingUp", () => {
@@ -305,7 +314,10 @@ export default {
       const noMoreTxt =
         this.pullUpLoad && this.pullUpLoad.txt && this.pullUpLoad.txt.noMore;
       return this.pullUpDirty ? moreTxt : noMoreTxt;
-    }
+    },
+    ...mapState([
+      "globel"
+    ])
   },
   watch: {
     isNoMore(cur,old){

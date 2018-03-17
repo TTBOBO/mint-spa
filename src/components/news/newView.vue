@@ -19,24 +19,8 @@
                     :isNoMore="globel.newsList[currentPage].isNoMore" 
                     ref ="loadMore"
                    >
-                   <!-- {{globel.newsList[currentPage].isNoMore}} -->
                    <articleCom :newsList="item.newList"></articleCom>
                    </loadDemo>
-                   
-                   <!-- :pullDownRefresh=pullUpLoad
-                    :pullUpLoad=pullUpLoad -->
-                   <!-- <div>
-                       <loadMore 
-                        :pageObj="objList"
-                        @changePage="changePage"
-                        :bottomMethod="bottomMethod"
-                        :topMethod="topMethod"
-                        :clickStatus="clickStatus"
-                        ref="loadmore"
-                        >
-                    <articleCom :newsList="newsList" :clickStatus="clickStatus"></articleCom>
-                        </loadMore>
-                   </div> -->
               </div>
           </div>
       </div>
@@ -130,7 +114,7 @@ export default {
         });
         //防止从详情页面返回时 没有返回到  之前的page
         this.activeLi(this.globel.currentPage,true);
-        this.getActive(this.globel.currentPage)
+        this.getActive(this.globel.currentPage);
       }, 20);
       this.$nextTick(() => {
         this.initSwiper();
@@ -181,7 +165,6 @@ export default {
       this.initPage(objList);
     },
     initPage(page) {
-      console.log()
       this.globel.newsList[this.currentPage].objList = page ? page : 1;
       //当下这行可忽略
       this.globel.newsList[this.currentPage].objList.filter = "hm_archives.typeid = "+ ( (this.currentPage % 7 ) + 2);
@@ -197,8 +180,7 @@ export default {
             this.globel.newsList[this.currentPage].isNoMore = true;
             
           }
-          
-          // this.$refs.loadMore[this.currentPage].forceUpdate(true);
+
           setTimeout(() =>{
              this.$refs.loadMore[this.currentPage].forceUpdate(true);
           },300)

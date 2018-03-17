@@ -142,6 +142,10 @@ export default new Router({
       path:'/setting',
       name:'setting',
       component: resolve => { require(['@/components/user/setting'], resolve) }, hiddent: true, title: 'setting',meta:{loginStatus:true}
+    }, {
+      path:'/scrollView',
+      name:'scrollView',
+      component: resolve => { require(['@/components/base/scrollview/scrollView'], resolve) }, hiddent: true, title: 'scrollView',meta:{loginStatus:true}
     }
 
     // {

@@ -48,6 +48,10 @@ export default {
                     title:'浏览记录',
                     link:'/browse',
                     icon:'iconfont icon-salefill'
+                },{
+                    title:'测试',
+                    link:'/scrollView',
+                    icon:'iconfont icon-salefill'
                 }],
             
             },

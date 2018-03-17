@@ -60,8 +60,10 @@ export const globelMutation = {
 
     [types.ALLOBJLIST](state,action) {
         let obj = state.objList;
-        state.newsList.forEach((item) => {
-            item.objList = JSON.parse(JSON.stringify(obj));
+        state.newsList.forEach((item,index) => {
+            if(item.newList.length == 0){
+                item.objList = JSON.parse(JSON.stringify(obj));
+            }
         });
     },
     [types.CHANGEPAGELIST](state,action){
@@ -70,5 +72,10 @@ export const globelMutation = {
                 item.objList = action.objList;
             }  
         });
+    },
+
+    [types.SETPOS](state,action){
+        // state.newsList[action.index].postion = action.pos;
+        console.log(action);
     }
 }

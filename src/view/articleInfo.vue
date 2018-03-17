@@ -122,6 +122,7 @@ import util from "../assets/js/util";
 import ykp from "../assets/js/ykp";
 import articleCom from "../components/find/articleCom";
 import loadMore from "../components/base/loadmore/loadmore";
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -175,7 +176,6 @@ export default {
     articleCom,
     loadMore
   },
-  computed: {},
   filters: {
     getNowTime(time, status) {
       return util.time.getNowTime(time, true);
@@ -421,9 +421,14 @@ export default {
       },8000);
     }
   },
+   computed: {
+    ...mapState([
+      "globel"
+    ])
+  },
   mounted() {
     this.browse();
-   
+    console.log(this.globel);
   },
   created() {
     this.loadScroll();

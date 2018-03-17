@@ -13,3 +13,5 @@ export const TARGETLIST = 'TARGETLIST';
 export const ALLOBJLIST = 'ALLOBJLIST';  //加载所有的  分页
 
 export const CHANGEPAGELIST = 'CHANGEPAGELIST';  //改变当前的  分页
+
+export const SETPOS = 'SETPOS'  //设置首页scroll的高度

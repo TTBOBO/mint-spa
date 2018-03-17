@@ -5,7 +5,7 @@
                         <div class="content-left" >
                             <div class="content-left-top">
                                 <div class="">
-                                    <img :src="item['face']" class="user-avtor">
+                                    <img :src="item['face']" :onerror="errorImg" class="user-avtor">
                                 </div>
                                 <div style="margin-left:.1rem;">
                                     <p> {{item['uname']}}</p>
@@ -42,7 +42,8 @@ import util from "../../assets/js/util";
 export default {
   data() {
     return {
-      tip: { 1: "新闻", 2: "热点", 3: "资讯", 4: "广告", 5: "专题" }
+      tip: { 1: "新闻", 2: "热点", 3: "资讯", 4: "广告", 5: "专题" },
+      errorImg: 'this.src="' + require('../../assets/img/picture.png') + '"'
     };
   },
   props: {
@@ -67,7 +68,9 @@ export default {
     }
   },
   created() {},
-  mounted() {},
+  mounted() {
+     
+  },
   components: {},
   computed: {}
 };
