@@ -1,6 +1,6 @@
 # huiming
 
-> A Vue.js project
+> A Vue.js project    线上地址: http://123.207.114.48:83/
 
 ## Build Setup
 
