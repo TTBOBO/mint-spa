@@ -44,7 +44,7 @@
                     <loading></loading>
                 </div>
                 <!-- 加载完成 -->
-                <div v-else><span>{{refreshTxt}}</span></div>
+                <div v-else><span class="refresh-txt">{{refreshTxt}}</span></div>
                 </div>
             </div>
         </slot>
@@ -366,6 +366,9 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+.before-trigger,.refresh-txt{
+  font-size: .12rem;
 }
 </style>
 

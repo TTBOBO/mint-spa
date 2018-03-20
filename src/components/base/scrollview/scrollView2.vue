@@ -3,14 +3,11 @@
     <div class="wrapper" ref="wrapper">
         <!--定义需要滚动的内容区域-->
         <ul class="content" ref="sliderGroup" >
-            <li v-for="(item,index) in items" :class="{'wrapper-item' :type == 1,'wrapper-item2' :type == 2,'wrapper-item3' :type == 3}"  :key="index" :data-id="'item-'+(index)">
+            <li v-for="(item,index) in items" class="wrapper-item"  :key="index" :data-id="'item-'+(index)">
                 <img :src ="item" style="width:100%;" />
+                <p class="title">123131</p>
             </li>
         </ul>
-                <!--定义轮播图小圆点-->
-        <div class="dots">
-            <span class="dot" :class="{active: currentPageIndex === index }" v-for="(item, index) in dots" :key="index"></span>
-        </div>
     </div>
   </div>
 </template>
@@ -65,31 +62,20 @@ export default {
       for (let i = 0; i < this.children.length; i++) {
         let child = this.children[i];
         child.style.width = wrapperWidth + "px";
-        width += wrapperWidth;
+        width += (wrapperWidth + 8);
       }
-      // 如果是循环播放的话
-      if (this.loop && !isResize) {
-        width += 2 * wrapperWidth;
-      }
-      this.$refs.sliderGroup.style.width = width + "px";
+      this.$refs.sliderGroup.style.width = (width + 10 * 2) + "px";
     },
     _initScroll() {
       this.scroll = new BScroll(this.$refs.wrapper, {
         scrollX: true,
         scrollY: false,
         momentum: true,
-        snap: {
-          loop: this.loop, // ture表示前后增加一张
-          threshold: 0.3,
-          speed: 400
-        },
-        snapThreshold: 0.5, //滑动0.5到下一页
+        bounce:false,
         snapSpeed: 400,
         click: true,
         eventPassthrough: "vertical"
       });
-
-      console.log(this.scroll);
 
       // 监听滚动结束后,小圆点+1
       this.scroll.on("scrollEnd", () => {
@@ -176,19 +162,50 @@ export default {
 .wrapper .content {
   padding: 0px;
   margin: 0px;
+  clear: both;
+  height: 150px;
 }
-/* .wrapper .content .wrapper-item:first-child {
+.wrapper .content .wrapper-item:first-child {
   width: 100%;
-  height: 160px;
   list-style: none;
   float: left;
   box-sizing: border-box;
   overflow: hidden;
   text-align: center;
-  margin-left: .2rem;
-} */
-.wrapper .content .wrapper-item li{
-    margin: 0 .04rem;
+  margin-left: 14px;
+}
+
+.wrapper .content .wrapper-item:last-child {
+  width: 100%;
+  list-style: none;
+  float: left;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+  margin-right: 14px;
+}
+.wrapper .content .wrapper-item{
+    margin: 0 4px;
+    border-radius: 3px;
+    height: 100%;
+    position: relative;
+}
+.wrapper .content .wrapper-item .title{
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 60px 13px 12px;
+    color: #FFF;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 100%);
+    -webkit-text-align: left;
+    text-align: left;
+    font-size: 17px;
+    line-height: 24px;
+    word-break: break-all;
+    white-space: normal;
+    margin: 0;
 }
 .wrapper .content .wrapper-item2 {
   width: 95%;

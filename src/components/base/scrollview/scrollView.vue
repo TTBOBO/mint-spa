@@ -1,17 +1,22 @@
 <template>
   <div>
       <scroll>
-          <ul class="content">
-            <li v-for="(item,index) in items" :key="index" :data-id="'item-'+(index)">
-                <img :src ="item" style="width:100%" />
+            <!-- <ul class="content">
+                <li v-for="(item,index) in items" :key="index" :data-id="'item-'+(index)">
+                    <img :src ="item" style="width:100%" />
                 </li>
-            </ul>
+            </ul> -->
       </scroll>
+      <div>
+          <scroll2></scroll2>
+      </div>
+      
   </div>
 </template>
 
 <script>
 import scroll from './scrollView1';
+import scroll2 from './scrollView2';
 export default {
     data(){
         return {
@@ -26,7 +31,8 @@ export default {
         
     },
     components: {
-        scroll
+        scroll,
+        scroll2
     }
 }
 </script>
